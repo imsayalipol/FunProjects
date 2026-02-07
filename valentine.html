@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine? 💕</title>
+
+    <style>
+        /* This CSS styles the entire page */
+
+        /* BODY - The whole page background */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            /* 100% of viewport height */
+            display: flex;
+            /* Flexbox for centering */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Purple gradient */
+            font-family: Arial, sans-serif;
+        }
+
+        /* POPUP CONTAINER - The main question box */
+        .popup-container {
+            background-color: white;
+            padding: 40px 60px;
+            /* Space inside the box */
+            border-radius: 20px;
+            /* Rounded corners */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            /* Shadow effect */
+            text-align: center;
+            /* Center the text */
+        }
+
+        /* HEADING - The question text */
+        h1 {
+            color: #e91e63;
+            /* Pink color */
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        /* BUTTONS CONTAINER - Holds both buttons */
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            /* Space between buttons */
+            justify-content: center;
+        }
+
+        /* BUTTONS - Style for both Yes and No buttons */
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            /* Shows hand cursor on hover */
+            font-weight: bold;
+            transition: transform 0.2s;
+            /* Smooth animation */
+        }
+
+        /* YES BUTTON - Green styling */
+        #yesButton {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+
+        #yesButton:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+            transform: scale(1.05);
+            /* Slightly bigger on hover */
+        }
+
+        /* NO BUTTON - Red styling */
+        #noButton {
+            background-color: #f44336;
+            /* Red */
+            color: white;
+            position: relative;
+            /* Needed for moving the button later */
+        }
+
+        /* SUCCESS MESSAGE - Hidden at first, shows after clicking Yes */
+        .success-message {
+            display: none;
+            /* Hidden by default */
+            background-color: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .success-message h2 {
+            color: #4CAF50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .success-message img {
+            max-width: 300px;
+            /* GIF won't be too big */
+            border-radius: 10px;
+        }
+
+        /* FAIL MESSAGE - Hidden at first, shows if No is clicked */
+        .fail-message {
+            display: none;
+            /* Hidden by default */
+            background-color: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .fail-message h2 {
+            color: #f44336;
+            /* Red color for fail message */
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .fail-message img {
+            max-width: 300px;
+            /* GIF won't be too big */
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="popup-container">
+        <h1>Will you be my Galentine? 😉</h1>
+        <div class="buttons">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <h2>Best decision you ever made! 😄</h2>
+        <img src="https://tenor.com/mjJbOEB7rwX.gif" alt="Celebration">
+    </div>
+    <div class="fail-message" id="successMessage">
+        <h2>Really...??!!! </h2>
+        <img src="https://tenor.com/tJW8AP0EeXS.gif" alt="Celebration">
+    </div>
+
+
+    <script>
+        // STEP 3: JAVASCRIPT CODE
+
+        // Get references to the elements we need to control
+        const yesButton = document.getElementById('yes');
+        const noButton = document.getElementById('no');
+        const popupContainer = document.querySelector('.popup-container');
+        const successMessage = document.getElementById('successMessage');
+        const failMessage = document.getElementById('failMessage');
+
+
+        // PART 1: Make the No button move away when mouse hovers over it
+        noButton.addEventListener('mouseenter', function () {
+            // Get the size of the window
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // Get the size of the button
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+
+            // Calculate random position (making sure button stays in window)
+            const randomX = Math.random() * (windowWidth - buttonWidth - 100);
+            const randomY = Math.random() * (windowHeight - buttonHeight - 100);
+
+            // Move the button to the random position
+            noButton.style.position = 'fixed';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        });
+
+
+        // PART 2: When Yes button is clicked
+        yesButton.addEventListener('click', function () {
+            // Hide the popup
+            popupContainer.style.display = 'none';
+
+            // Show the success message
+            successMessage.style.display = 'block';
+        });
+
+
+        // PART 3: When No button is clicked (if she manages to catch it!)
+        noButton.addEventListener('click', function () {
+            // Hide the popup
+            popupContainer.style.display = 'none';
+
+            // Show the fail message
+            failMessage.style.display = 'block';
+        });
+
+    </script>
+
+</body>
